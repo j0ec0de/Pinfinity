@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { getImagesAndVideos } from '../../services/api';
 
-const ImageGallery = () => {
+const ImageGallery = ({ images, loading }) => {
 
-    const [images, setImages] = useState([]);
+    // show loading state
+    if(loading) {
+        return(
+        <div className="flex justify-center items-center mt-10">
+            <div className="text-gray-500 text-lg">Loading images...</div>
+        </div>            
+        );
+    }
 
-    useEffect(() => {
-        async function fetchImages() {
-            const result = await getImagesAndVideos();
-            setImages(result);
-            console.log('Pinterest API response:',result);
-
-        }
-        fetchImages();
-    }, []);
-    
-
+  // Show empty state
+  if (!images || images.length === 0) {
+    return (
+      <div className="flex justify-center items-center mt-10">
+        <div className="text-gray-500 text-lg">No images found</div>
+      </div>
+    );
+  }
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-10'>
