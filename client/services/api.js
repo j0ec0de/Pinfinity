@@ -1,4 +1,6 @@
-const API_KEY = "iiws7C3Z4dJUYgp9NycuFmxlK0HP6oLEIsKEQqIWJDQQNAVMK9ZTVcTa"
+// import meta
+
+const API_KEY = import.meta.KEY;
 const BASE_URL = "https://api.pexels.com/v1"
 
 export const getImagesAndVideos = async () => {
