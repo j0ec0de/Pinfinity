@@ -14,6 +14,7 @@ const ImageGallery = () => {
         }
         fetchImages();
     }, []);
+    
 
 
   return (
