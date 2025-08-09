@@ -1,6 +1,6 @@
 // import meta
 
-const API_KEY = import.meta.KEY;
+const API_KEY = import.meta.VITE_PEXELS_API_KEY;
 const BASE_URL = "https://api.pexels.com/v1"
 
 export const getImagesAndVideos = async () => {
@@ -22,7 +22,7 @@ export const getImagesAndVideos = async () => {
 
 export const searchImagesAndVideos = async(query) => {
     try {
-        const response = await fetch(`${BASE_URL}/search?query=${query}&per_page`, {
+        const response = await fetch(`${BASE_URL}/search?query=${query}&per_page=25`, {
             headers: {
                 Authorization: API_KEY,
             },

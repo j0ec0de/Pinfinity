@@ -9,6 +9,8 @@ const ImageGallery = () => {
         async function fetchImages() {
             const result = await getImagesAndVideos();
             setImages(result);
+            console.log('Pinterest API response:',result);
+
         }
         fetchImages();
     }, []);
@@ -20,10 +22,16 @@ const ImageGallery = () => {
             <div key={photo.id} className='overflow-hidden rounded-lg shadow-md'>
                 <img
                     src={photo.src.large}
-                    alt={photo.photographer}
+                    alt={photo.photographer || `Photo by ${photo.photographer}`}
                     className="w-full h-80 object-cover hover:scale-105 transition-transform"
                 />
+                {/* details */}
+                <div className='p-5'>
+                    <h3> { `Photo by ${photo.photographer}`} </h3>
+                    <p> {photo.alt} </p>
+                </div>
             </div>
+            
         ))}
     </div>
   );
