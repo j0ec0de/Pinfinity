@@ -18,7 +18,6 @@ const SearchBar = ({ onSearch,loading}) => {
     setSearchQuery(e.target.value);
   };
 
-
   
 
   return (
