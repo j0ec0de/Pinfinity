@@ -1,7 +1,7 @@
 // import meta
 
 const API_KEY = import.meta.env.VITE_PEXELS_API_KEY;
-const BASE_URL = "https://api.pexels.com/v1"
+const BASE_URL = "https://api.pexels.com/v1" // changed to use proxy
 
 export const getImagesAndVideos = async () => {
     try{
@@ -10,6 +10,10 @@ export const getImagesAndVideos = async () => {
                 Authorization: `Bearer ${API_KEY}`,
             },
         });
+
+        if(!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const data = await response.json();
         return data.photos;
@@ -27,6 +31,10 @@ export const searchImagesAndVideos = async(query) => {
                 Authorization: `Bearer ${API_KEY}`,
             },
         });
+
+        if(!response.ok) {
+            throw new Error(`HTTPS error! status: ${response.status}`);
+        }
 
         const data = await response.json();
         return data.photos;

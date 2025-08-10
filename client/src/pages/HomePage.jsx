@@ -14,6 +14,7 @@ const HomePage = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   // useEffect to fetch all the images
 
@@ -39,6 +40,10 @@ const HomePage = () => {
 
   // search function to pass to Searchbar
   const handleSearch = async (searchQuery) => {
+    // update search query state
+
+    setSearchQuery(searchQuery);
+
     if(!searchQuery.trim()) {
       // if search is empty, fetch initial images
       fetchImages();
@@ -82,6 +87,16 @@ const HomePage = () => {
           )}
 
           <ImageGallery images={images} loading={loading} />
+
+            {/*<ImageGallery
+              images={images.map((photo)=>(
+                photo.alt.toLowerCase().startsWith(searchQuery)        
+              ))}  
+          
+              loading={loading}
+            />
+            */}
+
         </div>
       </div>
     </div>

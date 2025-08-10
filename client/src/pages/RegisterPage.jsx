@@ -54,7 +54,7 @@ const RegisterPage = () => {
         <Link to="/" >
         <button
         type='submit'
-        className='bg-sky-400 rounded-lg p-2 ml-5 mt-5 text-white'
+        className='bg-purple-500 rounded-lg p-2 ml-5 mt-5 text-white'
         >
             Back
         </button>
@@ -63,7 +63,7 @@ const RegisterPage = () => {
 
         <div className='min-h-screen flex items-center justify-center px-4'>
             <div className='w-full max-w-md bg-white rounded-xl shadow-xl p-8 space-y-6 border border-gray-300'>
-                <h2 className='text-2xl font-bold text-gray-800 text-left'>Welcome to <span className='text-blue-500'> Pinfinity </span> </h2>
+                <h2 className='text-2xl font-bold text-gray-800 text-left'>Welcome to <span className='text-purple-700'> Pinfinity </span> </h2>
 
                 <form className='space-y-4' onSubmit={handleSubmit}>
 
@@ -117,7 +117,7 @@ const RegisterPage = () => {
 
                     <button
                         type='submit'
-                        className='w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-200'
+                        className='w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-800 transition duration-200'
                     >
                         Sign up
                     </button>

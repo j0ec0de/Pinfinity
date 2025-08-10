@@ -32,7 +32,7 @@ const ImageGallery = ({ images, loading }) => {
                 />
                 {/* details */}
                 <div className='p-5'>
-                    <h3> { `Photo by ${photo.photographer}`} </h3>
+                    <h3 className='font-bold'> { `Photo by ${photo.photographer}`} </h3>
                     <p> {photo.alt} </p>
                 </div>
             </div>
