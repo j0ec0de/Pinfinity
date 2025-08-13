@@ -1,13 +1,46 @@
 import React, { useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await fetch("http://localhost:3000/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body : JSON.stringify({ email, password })
+            })
+
+            const data = await res.json();
+
+            if(!res.ok) {
+                toast.error(data.message);
+            } else {
+                const message = "Logged in !!";
+                toast.success(message);
+            }
+
+
+        } catch (error) {
+            alert("Something went wrong!");
+            console.log(error);
+        }
+    }
 
 
   return (
     <>
-
+    <Toaster
+            position="bottom-center"
+            reverseOrder = {false}
+    />
     <Link to="/" >
     <button
     type='submit'
@@ -22,13 +55,14 @@ const LoginPage = () => {
         <div className="w-full max-w-md bg-white rounded-xl shadow-2xl p-8 space-y-6 border border-gray-300">
             <h2 className="text-2xl font-bold text-gray-800 text-left">Welcome to <span className="text-purple-700">Pinfinity</span></h2>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
                 <label className="block text-sm font-medium text-gray-600 mb-1">Email</label>
                 <input
                 type="email"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 placeholder="you@example.com"
+                onChange={(e) => setEmail(e.target.value)}
                 required
                 />
             </div>
@@ -39,6 +73,7 @@ const LoginPage = () => {
                 type="password"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
                 placeholder="••••••••"
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 />
             </div>

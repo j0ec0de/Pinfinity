@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 
-
+// to create user/ sign up
 export const createUser = async(req, res) => {
     const { name, email, password } = req.body;
 
@@ -24,17 +24,22 @@ export const createUser = async(req, res) => {
         //new user is created       
         const user = new User({ name, email, password: hashedPassword });
 
+
+        if(error) {
+            console.log(error);
+        }
         // saved to the db
         await user.save();
         res.status(201).json({ message: "User registered successfully" });
 
     } catch (error) {
         console.error("Error in creating a user",error.message);
-        res.status(500).json({ success: false, message: "Server Error!" });
+
+        // res.status(500).json({ success: false, message: "Server Error!" });
     }
 }
 
-
+// user login function
 export const userLogin = async(req, res) => {
 
     const { email, password } = req.body;
@@ -57,12 +62,21 @@ export const userLogin = async(req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         res.json({ token, user: {id: user._id, name: user.name, email: user.email} });
+
+        console.log("Token is: "+token);
+        console.log("user: "+user);
+        console.log("success");
         
     } catch (error) {
-        console.error("Error in loggin in ",error.message);
+        console.error("Error in logging in ",error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 }
+
+
+// onboarding
+
+
 
 
 

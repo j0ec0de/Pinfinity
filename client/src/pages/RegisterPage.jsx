@@ -15,8 +15,9 @@ const RegisterPage = () => {
         e.preventDefault()
 
         if(password != confirmPassword) {
-            alert("Passwords do not match!")
-            return
+            const message = "Passwords do not match";
+            toast.error(message);
+            return; // add return to prevent form submission
         }
 
         try{
@@ -30,8 +31,10 @@ const RegisterPage = () => {
 
             const data = await res.json()
 
+            
+
             if(!res.ok) {
-                alert(data.message)
+                toast.error(data.message);
             } else {
                 toast.success(data.message);
                 setTimeout(()=> {
