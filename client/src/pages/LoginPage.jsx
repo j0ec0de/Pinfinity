@@ -1,32 +1,33 @@
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const LoginPage = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { login } = useAuth();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await fetch("http://localhost:3000/api/auth/login", {
-                method: "POST",
-                headers: {
-                    "Content-type" : "application/json"
-                },
-                body : JSON.stringify({ email, password })
-            })
 
-            const data = await res.json();
+            const result = await login(email, password);
 
-            if(!res.ok) {
-                toast.error(data.message);
+            if(result.success) {
+                toast.success("Logged in successfully!");
+                // Navigate to explore page after successful login
+
+                setTimeout(() => {
+                    navigate('/explore');
+                }, 1000);
             } else {
-                const message = "Logged in !!";
-                toast.success(message);
+                toast.error(result.message);
             }
-
 
         } catch (error) {
             alert("Something went wrong!");
@@ -90,9 +91,10 @@ const LoginPage = () => {
 
             <button
                 type="submit"
+                disabled={isLoading}
                 className="w-full bg-purple-500 text-white py-2 rounded-lg hover:bg-purple-800 transition duration-200"
             >
-                Sign In
+                {isLoading ? 'Signing In ...': 'Sign in'}
             </button>
             </form>
 

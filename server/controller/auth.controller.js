@@ -90,8 +90,32 @@ export const userLogin = async(req, res) => {
         console.log("user logged in successfully: ",user.email);
 
         
+
+        
     } catch (error) {
         console.error("Error in logging in ",error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+}
+
+
+
+// get user profile
+
+export const getUser = async(req, res) => {
+    try {
+        const user = req.user;
+
+        res.json({
+            success: true,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
+        });
+    } catch (error) {
+        console.error("Error getting user data: ", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 }
