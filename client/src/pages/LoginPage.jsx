@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage = () => {
 
